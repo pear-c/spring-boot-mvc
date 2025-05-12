@@ -23,10 +23,20 @@ public class StudentLoginController {
     private final StudentRepository studentRepository;
 
     @GetMapping("/login")
-    public String login(@CookieValue(value = "SESSION", required = false) String sessionId, Model model) {
+    public String login(@CookieValue(value = "SESSION", required = false) String sessionId,
+                        HttpServletRequest req,
+                        Model model) {
         if(StringUtils.hasText(sessionId)) {
-            model.addAttribute("id", sessionId);
-            return "studentView";
+            HttpSession session = req.getSession(false);
+            if(session != null) {
+                String studnetId = (String) session.getAttribute("id");
+                if(StringUtils.hasText(studnetId)) {
+                    Student student = studentRepository.getStudentById(studnetId);
+                    Student masked = Student.constructPasswordMaskedStudent(student);
+                    model.addAttribute("student", masked);
+                    return "redirect:/student/" + masked.getId();
+                }
+            }
         }
         return "loginForm";
     }
@@ -37,6 +47,8 @@ public class StudentLoginController {
                           Model model) {
         if(studentRepository.matches(id, pwd)) {
             HttpSession session = req.getSession(true);
+            session.setAttribute("id", id);
+
             Cookie cookie = new Cookie("SESSION", session.getId());
             resp.addCookie(cookie);
 
@@ -44,7 +56,7 @@ public class StudentLoginController {
             Student maskedStudent = Student.constructPasswordMaskedStudent(student);
             model.addAttribute("student", maskedStudent);
 
-            return "studentView";
+            return "redirect:/student/" + id;
         }
         return "redirect:/login";
     }

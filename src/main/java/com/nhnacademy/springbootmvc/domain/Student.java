@@ -2,9 +2,13 @@ package com.nhnacademy.springbootmvc.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Setter
 public class Student {
     private String id;
     private String password;
@@ -20,7 +24,7 @@ public class Student {
     private static final String MASK = "*****";
 
     public static Student constructPasswordMaskedStudent(Student student) {
-        Student newStudnet = student.createStudent(student.getId(), MASK, student.getName(), student.getEmail(), student.getScore(), student.getComment());
-        return newStudnet;
+        Student newStudent = student.createStudent(student.getId(), MASK, student.getName(), student.getEmail(), student.getScore(), student.getComment());
+        return newStudent;
     }
 }

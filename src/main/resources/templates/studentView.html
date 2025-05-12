@@ -9,11 +9,14 @@
     비밀번호: <span th:text="${student.password}"></span><br/>
     이름: <span th:text="${student.name}"></span><br/>
     이메일: <span th:text="${student.email}"></span><br/>
-    성적: <span th:text="${student.score}"></span><br/>
-    평가: <span th:text="${student.comment}"></span><br/>
+    <div th:if="${!hideScore}">
+        성적: <span th:text="${student.score}"></span><br/>
+        평가: <span th:text="${student.comment}"></span><br/>
+    </div>
+
 
     <br/>
 
-    <a href="/student/{studentId}/modify">정보 수정</a>
+    <a th:href="@{/student/{id}/modify(id=${student.id})}">정보 수정</a>
 </body>
 </html>

@@ -6,13 +6,25 @@
 </head>
 <body>
     <form method="post" action="/student/register">
-        아이디: <input type="text" name="id" /><br />
-        비밀번호: <input type="password" name="password" /><br />
-        이름: <input type="text" name="name" /><br />
-        이메일: <input type="text" name="email" /><br />
-        성적: <input type="text" name="score" /><br />
-        평가: <textarea name="comment" cols="40" rows="8"></textarea><br />
-        <input type="submit" />
+        <label th:text="#{student.id}">아이디</label>:
+        <input type="text" name="id" /><br />
+        <label th:text="#{student.password}">비밀번호</label>:
+        <input type="password" name="password" /><br />
+        <label th:text="#{student.name}">이름</label>:
+        <input type="text" name="name" /><br />
+        <label th:text="#{student.email}">이메일</label>:
+        <input type="text" name="email" /><br />
+        <label th:text="#{student.score}">성적</label>:
+        <input type="text" name="score" /><br />
+        <label th:text="#{student.comment}">평가</label>:<br/>
+        <textarea name="comment" cols="40" rows="8"></textarea><br />
+
+        <input type="submit" th:value="#{student.register.submit}" />
     </form>
+
+    <br/>
+    <!-- 언어 선택 -->
+    <a href="?locale=ko">한국어</a><br/>
+    <a href="?locale=en">English</a><br/>
 </body>
 </html>

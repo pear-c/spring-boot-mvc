@@ -6,13 +6,23 @@
 </head>
 <body>
 <form th:action="@{/student/{id}/modify(id=${student.id})}" method="post">
-    아이디: <input type="text" name="id" th:value="${student.id}" readonly /><br />
-    비밀번호: <input type="password" name="password" th:value="${student.password}" /><br />
-    이름: <input type="text" name="name" th:value="${student.name}" /><br />
-    이메일: <input type="text" name="email" th:value="${student.email}" /><br />
-    성적: <input type="text" name="score" th:value="${student.score}" /><br />
-    평가: <textarea name="comment" cols="40" rows="8" th:text="${student.comment}"></textarea><br />
-    <input type="submit" value="수정 완료"/>
+    <label th:text="#{student.id}">아이디</label>:
+    <input type="text" name="id" th:value="${student.id}" readonly /><br />
+    <label th:text="#{student.password}">비밀번호</label>:
+    <input type="password" name="password" th:value="${student.password}" /><br />
+    <label th:text="#{student.name}">이름</label>:
+    <input type="text" name="name" th:value="${student.name}" /><br />
+    <label th:text="#{student.email}">이메일</label>:
+    <input type="text" name="email" th:value="${student.email}" /><br />
+    <label th:text="#{student.score}">성적</label>:
+    <input type="text" name="score" th:value="${student.score}" /><br />
+    <label th:text="#{student.comment}">평가</label>:<br/>
+    <textarea name="comment" cols="40" rows="8" th:text="${student.comment}"></textarea><br />
+
+    <input type="submit" th:value="#{student.modify.submit}" />
 </form>
+
+<a href="?locale=ko">한국어</a><br/>
+<a href="?locale=en">English</a><br/>
 </body>
 </html>

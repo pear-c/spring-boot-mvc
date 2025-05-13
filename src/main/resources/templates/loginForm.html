@@ -6,12 +6,19 @@
 </head>
 <body>
     <form method="post" action="/login">
-        ID: <input type="text" name="id"/><br/>
-        PWD: <input type="password" name="pwd"/><br/>
+        <label th:text="#{login.id}">ID</label>:
+        <input type="text" name="id"/><br/>
+        <label th:text="#{login.password}">PWD</label>:
+        <input type="password" name="pwd"/><br/>
+
         <br/>
-        <input type="submit"/>
+        <input type="submit" th:value="#{login.submit}"/>
     </form>
 
-    <a href="/student/register">학생 등록</a>
+    <a href="/student/register" th:text="#{login.registerLink}">Register</a>
+
+<br/><br/>
+<a href="?locale=ko">한국어</a><br/>
+<a href="?locale=en">English</a><br/>
 </body>
 </html>

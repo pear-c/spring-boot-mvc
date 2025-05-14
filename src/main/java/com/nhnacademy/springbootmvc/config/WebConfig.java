@@ -1,5 +1,6 @@
 package com.nhnacademy.springbootmvc.config;
 
+import com.nhnacademy.springbootmvc.interceptor.LoginCheckInterceptor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,5 +32,8 @@ public class WebConfig implements WebMvcConfigurer {
         LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
         interceptor.setParamName("locale");
         registry.addInterceptor(interceptor);
+        registry.addInterceptor(new LoginCheckInterceptor())
+                .addPathPatterns("/student/**")
+                .excludePathPatterns("/student/register", "/login", "/error");
     }
 }
